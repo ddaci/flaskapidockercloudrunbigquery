@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def home():
     return """
-    <h1>Use the following routes</h1>
+    <h1>Use the following routes (add them to the url adress above)</h1>
     <p>/api/v2/resources/bigquery-data</p>
     <p>/api/v2/resources/books/by-author?author=David Brin</p>
     <p>/api/v2/resources/books/by-year?published_year=2005</p>
