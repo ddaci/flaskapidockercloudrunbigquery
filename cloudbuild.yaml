@@ -1,6 +1,5 @@
 options:
   logging: CLOUD_LOGGING_ONLY
-  logsBucket: gs://my-build-logs
 
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
