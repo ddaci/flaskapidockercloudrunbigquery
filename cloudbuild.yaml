@@ -20,7 +20,7 @@ steps:
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
-  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'YOUR_REGION', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'asia-east1', '--allow-unauthenticated']
   env:
   - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
 
