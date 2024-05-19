@@ -10,7 +10,7 @@ steps:
   - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/key.json'
 
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'europe-north1', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'us-west4', '--allow-unauthenticated']
   env:
   - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/key.json'
 
