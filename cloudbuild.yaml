@@ -8,6 +8,6 @@ steps:
 
 images:
 - 'gcr.io/flaskapidockercloudrunbigquery/flask-app'
+logsBucket: 'gs://my-build-logs'
 options:
   logging: CLOUD_LOGGING_ONLY
-  logsBucket: 'gs://my-build-logs'
