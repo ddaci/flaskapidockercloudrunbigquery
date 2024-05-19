@@ -1,18 +1,31 @@
 steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    # Descărcăm cheia JSON din GCS în directorul de lucru al build-ului
+    gsutil cp gs://cheie/flaskapidockercloudrunbigquery-88d7334afd05.json /workspace/flaskapidockercloudrunbigquery-88d7334afd05.json
+
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '.']
   env:
-    - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
+
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/flaskapidockercloudrunbigquery/flask-app']
   env:
-    - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'asia-east1', '--allow-unauthenticated']
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/flaskapidockercloudrunbigquery/flask-app', '--platform', 'managed', '--region', 'YOUR_REGION', '--allow-unauthenticated']
   env:
-    - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/flaskapidockercloudrunbigquery-88d7334afd05.json'
+
 images:
 - 'gcr.io/flaskapidockercloudrunbigquery/flask-app'
 
-options:
-  logging: CLOUD_LOGGING_ONLY
+artifacts:
+  objects:
+    location: 'gs://cheie'
+    paths: ['flaskapidockercloudrunbigquery-88d7334afd05.json']

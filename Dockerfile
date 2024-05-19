@@ -1,27 +1,20 @@
-# Folosește imaginea oficială Python de pe Docker Hub
-FROM python:3.9
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# Setează directorul de lucru
+# Set the working directory in the container
 WORKDIR /app
 
-# Copiază fișierul requirements
-COPY requirements.txt requirements.txt
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Instalează dependențele
-RUN pip install -r requirements.txt
+# Create a virtual environment
+RUN python -m venv venv
 
-# Copiază restul aplicației
-COPY . .
+# Activate the virtual environment and install dependencies
+RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt
 
-# Copiază cheia contului de serviciu (am salvat fișierul key.json în directorul aplicației)
-COPY key.json /app/key.json
-
-# Setează variabila de mediu pentru Flask și credențialele Google
-ENV FLASK_APP=app.py
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/key.json
-
-# Expune portul pe care rulează aplicația
+# Expose port 8080 to the outside world
 EXPOSE 8080
 
-# Comandă pentru a rula aplicația folosind Gunicorn
-CMD ["gunicorn", "-b", ":8080", "app:app"]
+# Set the entrypoint to run the app using the virtual environment
+ENTRYPOINT ["/app/venv/bin/python", "app.py"]
