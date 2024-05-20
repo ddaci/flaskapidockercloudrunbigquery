@@ -16,5 +16,10 @@ RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
-# Set the entrypoint to run the app using the virtual environment
-ENTRYPOINT ["/app/venv/bin/python", "app.py"]
+# Set the environment variable to tell Flask to run the app
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=production
+
+# Set the entrypoint to run gunicorn server using the virtual environment
+CMD ["/app/venv/bin/gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
