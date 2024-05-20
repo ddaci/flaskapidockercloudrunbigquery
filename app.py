@@ -8,7 +8,7 @@ app = Flask(__name__)
 def home():
     return """
     <h1>Use the following routes (add them to the url adress above)</h1>
-    <p>/api/v2/resources/bigquery-data</p>
+    <p>all books /api/v2/resources/bigquery-data</p>
     <p>/api/v2/resources/books/by-author?author=David Brin</p>
     <p>/api/v2/resources/books/by-year?published_year=2005</p>
     <p>/api/v2/resources/books</p>
