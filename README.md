@@ -1,64 +1,60 @@
-# flaskapidockercloudrunbigquery
+# Soluții de implementare a unei aplicații REST API în Google Cloud Platform
 
-More about this project: https://ddaci.github.io/post/chapter-2/
-## 1. Project Description  
-The REST API application is built using **Python** and **Flask**, designed to retrieve book data from an **SQLite3** database.  
-👉 [GitHub Repository](https://github.com/cpatrickalves/simple-flask-api)
+## 1. Descrierea temei
+Aplicația REST API este realizată în Python și Flask pentru a prelua date despre cărți dintr-o bază de date SQLite3, folosind endpoint-uri pentru operații CRUD. Link către proiect: [Simple Flask API](https://github.com/cpatrickalves/simple-flask-api).
 
-A **REST API** exposes the functionalities of an application or database through a set of **endpoints (URLs)**. These endpoints allow clients (such as web or mobile apps) to perform **CRUD operations** (Create, Read, Update, Delete) via **HTTP requests**.  
-The main REST principles rely on HTTP methods:
-- **GET** – Retrieve data  
-- **POST** – Create new data  
-- **PUT/PATCH** – Update existing data  
-- **DELETE** – Remove data  
+## 2. Modelul de date utilizat
+Baza de date `books.db` conține informații despre cărți și este gestionată cu SQLite. Fișierul de date `books.csv` este stocat în Google Cloud Storage și analizat cu BigQuery.
 
-This project demonstrates how to implement and deploy the REST API on **Google Cloud Platform (GCP)**.
+## 3. Soluții pentru stocarea datelor
+- **Google Cloud Storage (GCS)**: Stocare scalabilă și securizată pentru fișierul `books.csv`.
+- **BigQuery**: Interogarea rapidă a seturilor mari de date.
 
----
+## 4. Implementarea aplicației
+- **App Engine** găzduiește aplicația Flask.
+- Solicitările HTTP sunt gestionate de `app.py` și bibliotecile din `requirements.txt`.
+- Configurația pentru App Engine se află în `app.yaml`.
 
-## 2. Data Model Description  
-The database **`books.db`** contains information about books.  
-Data is stored and managed using **SQLite**, a lightweight, serverless, file-based **relational database management system** (RDBMS).
+**Pași principali:**
+1. Fork proiect GitHub.
+2. Clonare în Cloud Shell.
+3. Implementare cu `gcloud app deploy`.
 
----
+## 5. Funcționalitățile API-ului
+- **Obținere toate cărțile:**  
+  `[GET]` [https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/bigquery-data](https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/bigquery-data)
 
-## 3. Data Storage Solutions and Rationale  
-For data storage, we chose **Google Cloud Storage (GCS)** and **BigQuery** for the following reasons:
+- **Cărți după autor:**  
+  `[GET]` [https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/books/by-author?author=David%20Brin](https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/books/by-author?author=David%20Brin)
 
-### 🌤 **Google Cloud Storage (GCS)**  
-- Used to store the **`books.csv`** file generated from the initial SQLite database.  
-- Provides **scalability**, **durability**, and **high availability**.  
-- Ensures data is **secure**, **easily accessible**, and **cost-efficient**.  
+- **Cărți după an:**  
+  `[GET]` [https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/books/by-year?published_year=2005](https://proiectccrefacut.uc.r.appspot.com/api/v2/resources/books/by-year?published_year=2005)
 
-###  **BigQuery**  
-- Chosen for **loading the `books.csv` file** and querying the data.  
-- Handles **large structured datasets** efficiently.  
-- Supports **fast querying**, enabling quick insights from the datasets.  
+- **Adăugare carte:**  
+  `[POST]` [https://projectcloudmasterid.ew.r.appspot.com/api/v2/resources/books](https://projectcloudmasterid.ew.r.appspot.com/api/v2/resources/books)
 
-Both **GCS** and **BigQuery** integrate seamlessly into the **Google Cloud Platform (GCP)** ecosystem, simplifying development while ensuring scalability and high performance.
+## 6. Automatizarea trecerii în producție
+- **CI/CD cu Cloud Build:** Monitorizare GitHub pentru construirea și implementarea automată.
+- **Cloud Run:** Rularea aplicației containerizate folosind Docker.
+- **Dockerfile:** Definirea mediului de execuție și a dependințelor.
+- **Cloud Build YAML:** Automatizare pentru construirea imaginii și implementarea pe Cloud Run.
 
----
+## 7. Permisiuni și securitate
+- **Conturi de serviciu:** Roluri atribuite pentru Cloud Build, App Engine și BigQuery.
+- **Permisiuni:** Artifact Registry Writer, Cloud Build Editor, Storage Admin, Service Account User.
 
-## ⚙ 4. Data Model Implementation  
-The implementation involves the following GCP services: **App Engine**, **BigQuery**, and **Google Cloud Storage**.
+## 8. Monitorizare și SLA
+- **Timp de răspuns:** 95% din cereri răspund sub 200 ms.
+- **Rată de eroare:** Sub 1%.
+- **Disponibilitate:** 99,9%.
+- **Succes încărcare în BD:** 99% pentru cererile POST.
 
-###  **Workflow Overview:**
-1. **User Request:** The user sends an **HTTP request** to the Flask application.  
-2. **API Processing:** The **`app.py`** file processes the request and, if necessary, performs **queries in BigQuery**.  
-3. **Dependencies:** The **`requirements.txt`** file ensures that all necessary libraries are installed for request processing.  
-4. **Configuration:** The **`app.yaml`** file defines how the application is deployed and managed on **App Engine**, including how requests are routed.
-
----
-
-## 📈 5. System Architecture Diagram  
-The following diagram illustrates how users interact with the Flask application and how its components communicate:
-
-![restapi](https://github.com/user-attachments/assets/cc4ff209-92a1-4687-a97c-84fb8fcefe71)
-
-**Figure 1:** User interaction flow with the Flask REST API and Google Cloud services.  
+## 9. Link-uri utile
+- [Aplicația live](https://flask-app-bqrg5cd7tq-de.a.run.app/)
+- [BigQuery Endpoint](https://flask-app-bqrg5cd7tq-de.a.run.app/api/v2/resources/bigquery-data)
+- [Cărți după autor](https://flask-app-bqrg5cd7tq-de.a.run.app/api/v2/resources/books/by-author?author=David%20Brin)
+- [Cărți după an](https://flask-app-bqrg5cd7tq-de.a.run.app/api/v2/resources/books/by-year?published_year=2005)
 
 ---
 
-##  **Conclusion**  
-This project demonstrates how to build a scalable, cloud-based **REST API** using **Flask**, **Google Cloud Storage**, and **BigQuery**.  
-It ensures **efficient data storage**, **fast querying**, and **secure access** while leveraging **GCP's powerful ecosystem**.
+Acest proiect demonstrează utilizarea serviciilor Google Cloud Platform pentru dezvoltarea, implementarea și automatizarea unei aplicații REST API eficiente și scalabile.
