@@ -1,7 +1,7 @@
 # flaskapidockercloudrunbigquery
 
 More about this project: https://ddaci.github.io/post/chapter-2/
-## 📝 1. Project Description  
+## 1. Project Description  
 The REST API application is built using **Python** and **Flask**, designed to retrieve book data from an **SQLite3** database.  
 👉 [GitHub Repository](https://github.com/cpatrickalves/simple-flask-api)
 
@@ -16,21 +16,21 @@ This project demonstrates how to implement and deploy the REST API on **Google C
 
 ---
 
-## 📊 2. Data Model Description  
+## 2. Data Model Description  
 The database **`books.db`** contains information about books.  
 Data is stored and managed using **SQLite**, a lightweight, serverless, file-based **relational database management system** (RDBMS).
 
 ---
 
-## 🛠️ 3. Data Storage Solutions and Rationale  
+## 3. Data Storage Solutions and Rationale  
 For data storage, we chose **Google Cloud Storage (GCS)** and **BigQuery** for the following reasons:
 
-### 🌤️ **Google Cloud Storage (GCS)**  
+### 🌤 **Google Cloud Storage (GCS)**  
 - Used to store the **`books.csv`** file generated from the initial SQLite database.  
 - Provides **scalability**, **durability**, and **high availability**.  
 - Ensures data is **secure**, **easily accessible**, and **cost-efficient**.  
 
-### 🚀 **BigQuery**  
+###  **BigQuery**  
 - Chosen for **loading the `books.csv` file** and querying the data.  
 - Handles **large structured datasets** efficiently.  
 - Supports **fast querying**, enabling quick insights from the datasets.  
@@ -39,10 +39,10 @@ Both **GCS** and **BigQuery** integrate seamlessly into the **Google Cloud Platf
 
 ---
 
-## ⚙️ 4. Data Model Implementation  
+## ⚙ 4. Data Model Implementation  
 The implementation involves the following GCP services: **App Engine**, **BigQuery**, and **Google Cloud Storage**.
 
-### 🔄 **Workflow Overview:**
+###  **Workflow Overview:**
 1. **User Request:** The user sends an **HTTP request** to the Flask application.  
 2. **API Processing:** The **`app.py`** file processes the request and, if necessary, performs **queries in BigQuery**.  
 3. **Dependencies:** The **`requirements.txt`** file ensures that all necessary libraries are installed for request processing.  
@@ -52,11 +52,13 @@ The implementation involves the following GCP services: **App Engine**, **BigQue
 
 ## 📈 5. System Architecture Diagram  
 The following diagram illustrates how users interact with the Flask application and how its components communicate:
-![alt text](/images/image4.png "Overview")
+
+![restapi](https://github.com/user-attachments/assets/cc4ff209-92a1-4687-a97c-84fb8fcefe71)
+
 **Figure 1:** User interaction flow with the Flask REST API and Google Cloud services.  
 
 ---
 
-## 🌟 **Conclusion**  
+##  **Conclusion**  
 This project demonstrates how to build a scalable, cloud-based **REST API** using **Flask**, **Google Cloud Storage**, and **BigQuery**.  
 It ensures **efficient data storage**, **fast querying**, and **secure access** while leveraging **GCP's powerful ecosystem**.
