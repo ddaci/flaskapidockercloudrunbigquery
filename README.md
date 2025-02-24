@@ -39,6 +39,9 @@ Baza de date `books.db` conține informații despre cărți și este gestionată
 - **Dockerfile:** Definirea mediului de execuție și a dependințelor.
 - **Cloud Build YAML:** Automatizare pentru construirea imaginii și implementarea pe Cloud Run.
 
+![diagramaAutomatizareRestApi](https://github.com/user-attachments/assets/d9ef4b6c-8284-4a8c-9976-c2ef3d6f691c)
+
+
 ## 7. Permisiuni și securitate
 - **Conturi de serviciu:** Roluri atribuite pentru Cloud Build, App Engine și BigQuery.
 - **Permisiuni:** Artifact Registry Writer, Cloud Build Editor, Storage Admin, Service Account User.
